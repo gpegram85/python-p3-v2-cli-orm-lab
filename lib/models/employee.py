@@ -52,11 +52,14 @@ class Employee:
 
     @department_id.setter
     def department_id(self, department_id):
-        if type(department_id) is int and Department.find_by_id(department_id):
+        department = Department.find_by_id(department_id)
+        # print(f"DEBUG: Checking department ID {department_id}, Found: {department}")
+        if isinstance(department_id, int) and department:
             self._department_id = department_id
         else:
             raise ValueError(
-                "department_id must reference a department in the database")
+                "department_id must reference a department in the database"
+            )
 
     @classmethod
     def create_table(cls):
